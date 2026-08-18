@@ -97,6 +97,21 @@
   .bar-label{display:flex; justify-content:space-between; font-size:13px; color:var(--muted); margin-bottom:5px;}
   .bar-track{background:var(--bg2); border:1px solid var(--border); border-radius:6px; height:8px; overflow:hidden;}
   .bar-fill{height:100%; border-radius:6px; background:linear-gradient(90deg,var(--accent),var(--accent2)); width:0%; transition:width 1.2s ease;}
+  .dsa-stats{display:flex; gap:16px; flex-wrap:wrap; margin-bottom:36px;}
+  .dsa-stat{flex:1; min-width:130px; background:var(--card); border:1px solid var(--border); border-radius:12px; padding:18px; text-align:center;}
+  .dsa-stat b{display:block; font-size:1.8rem; color:var(--accent);}
+  .dsa-stat span{color:var(--muted); font-size:12.5px;}
+  .dsa-grid{display:grid; grid-template-columns:repeat(auto-fit,minmax(210px,1fr)); gap:16px;}
+  .dsa-topic{background:var(--card); border:1px solid var(--border); border-radius:12px; padding:18px; transition:.2s;}
+  .dsa-topic:hover{border-color:var(--accent2); transform:translateY(-3px);}
+  .dsa-topic .head{display:flex; justify-content:space-between; align-items:center; margin-bottom:8px;}
+  .dsa-topic .head h4{font-size:14.5px; color:var(--text);}
+  .dsa-topic .head span{font-size:11px; padding:3px 8px; border-radius:10px; font-weight:600;}
+  .lvl-easy{background:rgba(94,234,212,0.15); color:var(--accent);}
+  .lvl-med{background:rgba(167,139,250,0.15); color:var(--accent2);}
+  .lvl-hard{background:rgba(248,113,113,0.15); color:#f87171;}
+  .dsa-track{background:var(--bg2); border-radius:6px; height:6px; overflow:hidden; margin-top:6px;}
+  .dsa-fill{height:100%; background:linear-gradient(90deg,var(--accent),var(--accent2)); width:0%; transition:width 1.2s ease;}
 </style>
 </head>
 <body>
@@ -108,6 +123,7 @@
     <li><a href="#projects">Projects</a></li>
     <li><a href="#skills">Skills</a></li>
     <li><a href="#education">Education</a></li>
+    <li><a href="#dsa">DSA</a></li>
     <li><a href="#contact">Contact</a></li>
   </ul>
 </nav>
@@ -229,6 +245,36 @@
   </div>
 </section>
 
+<section id="dsa">
+  <h2 class="section-title">DSA Practice</h2>
+  <p style="color:var(--muted); max-width:700px; margin-bottom:28px;">
+  Practicing Data Structures & Algorithms in Python to sharpen problem-solving and interview readiness — solutions organized topic-wise with explanations and test cases.
+  </p>
+
+  <div class="dsa-stats">
+    <div class="dsa-stat"><b>10</b><span>Topics Covered</span></div>
+    <div class="dsa-stat"><b>Python</b><span>Language</span></div>
+    <div class="dsa-stat"><b>Active</b><span>Practice Status</span></div>
+  </div>
+
+  <div class="dsa-grid">
+    <div class="dsa-topic"><div class="head"><h4>Arrays & Strings</h4><span class="lvl-easy">Core</span></div><div class="dsa-track"><div class="dsa-fill" data-w="85"></div></div></div>
+    <div class="dsa-topic"><div class="head"><h4>Sorting & Searching</h4><span class="lvl-easy">Core</span></div><div class="dsa-track"><div class="dsa-fill" data-w="80"></div></div></div>
+    <div class="dsa-topic"><div class="head"><h4>Two Pointers</h4><span class="lvl-med">Pattern</span></div><div class="dsa-track"><div class="dsa-fill" data-w="75"></div></div></div>
+    <div class="dsa-topic"><div class="head"><h4>Sliding Window</h4><span class="lvl-med">Pattern</span></div><div class="dsa-track"><div class="dsa-fill" data-w="70"></div></div></div>
+    <div class="dsa-topic"><div class="head"><h4>Recursion & Backtracking</h4><span class="lvl-hard">Advanced</span></div><div class="dsa-track"><div class="dsa-fill" data-w="65"></div></div></div>
+    <div class="dsa-topic"><div class="head"><h4>Linked List</h4><span class="lvl-med">Pattern</span></div><div class="dsa-track"><div class="dsa-fill" data-w="70"></div></div></div>
+    <div class="dsa-topic"><div class="head"><h4>Stack & Queue</h4><span class="lvl-easy">Core</span></div><div class="dsa-track"><div class="dsa-fill" data-w="75"></div></div></div>
+    <div class="dsa-topic"><div class="head"><h4>Hashing</h4><span class="lvl-easy">Core</span></div><div class="dsa-track"><div class="dsa-fill" data-w="80"></div></div></div>
+    <div class="dsa-topic"><div class="head"><h4>Binary Search</h4><span class="lvl-med">Pattern</span></div><div class="dsa-track"><div class="dsa-fill" data-w="75"></div></div></div>
+    <div class="dsa-topic"><div class="head"><h4>Trees & Graphs</h4><span class="lvl-hard">Advanced</span></div><div class="dsa-track"><div class="dsa-fill" data-w="60"></div></div></div>
+  </div>
+
+  <div style="margin-top:28px;">
+    <a class="btn btn-outline" href="https://github.com/JaySharma424/Dsa_with_python" target="_blank">View DSA Repo on GitHub →</a>
+  </div>
+</section>
+
 <section id="contact">
   <h2 class="section-title" style="justify-content:center;">Let's Connect</h2>
   <p style="color:var(--muted);">Open to opportunities in ML, Computer Vision, and Generative AI.</p>
@@ -269,6 +315,9 @@ const io=new IntersectionObserver(entries=>{
       e.target.classList.add('visible');
       if(e.target.id==='skills'){
         document.querySelectorAll('.bar-fill').forEach(b=>b.style.width=b.dataset.w+'%');
+      }
+      if(e.target.id==='dsa'){
+        document.querySelectorAll('.dsa-fill').forEach(b=>b.style.width=b.dataset.w+'%');
       }
     }
   });
