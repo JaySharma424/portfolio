@@ -1,0 +1,280 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Dhananjay Kumar Sharma | ML & GenAI Portfolio</title>
+<style>
+  :root{
+    --bg:#0a0e17; --bg2:#0f1420; --card:#131a2b; --border:#232c42;
+    --accent:#5eead4; --accent2:#a78bfa; --text:#e6ebf5; --muted:#8b95ac;
+  }
+  *{margin:0;padding:0;box-sizing:border-box;}
+  html{scroll-behavior:smooth;}
+  body{
+    background:radial-gradient(circle at 20% 0%, #14203a 0%, var(--bg) 45%);
+    color:var(--text); font-family:'Segoe UI',system-ui,-apple-system,sans-serif;
+    line-height:1.6; overflow-x:hidden;
+  }
+  nav{
+    position:fixed; top:0; width:100%; z-index:100;
+    display:flex; justify-content:space-between; align-items:center;
+    padding:18px 6%; backdrop-filter:blur(10px); background:rgba(10,14,23,0.7);
+    border-bottom:1px solid var(--border);
+  }
+  nav .logo{font-weight:700; color:var(--accent); letter-spacing:1px;}
+  nav ul{list-style:none; display:flex; gap:28px;}
+  nav a{color:var(--muted); text-decoration:none; font-size:14px; transition:.2s;}
+  nav a:hover{color:var(--accent);}
+  header{
+    min-height:100vh; display:flex; flex-direction:column; justify-content:center; align-items:center;
+    text-align:center; padding:0 5%; position:relative;
+  }
+  header::before{
+    content:""; position:absolute; width:500px; height:500px; border-radius:50%;
+    background:radial-gradient(circle, rgba(94,234,212,0.12), transparent 70%);
+    top:10%; left:50%; transform:translateX(-50%); z-index:0; filter:blur(20px);
+  }
+  header h1{font-size:clamp(2.2rem,6vw,4rem); font-weight:800; z-index:1;}
+  header h1 span{background:linear-gradient(90deg,var(--accent),var(--accent2)); -webkit-background-clip:text; background-clip:text; color:transparent;}
+  header p.tag{color:var(--muted); font-size:clamp(1rem,2vw,1.25rem); margin-top:14px; max-width:650px; z-index:1;}
+  .badges{display:flex; gap:10px; flex-wrap:wrap; justify-content:center; margin-top:26px; z-index:1;}
+  .badges span{border:1px solid var(--border); padding:6px 14px; border-radius:20px; font-size:12.5px; color:var(--accent);}
+  .cta{margin-top:34px; display:flex; gap:16px; z-index:1;}
+  .btn{padding:12px 26px; border-radius:8px; text-decoration:none; font-size:14px; font-weight:600; transition:.2s;}
+  .btn-primary{background:var(--accent); color:#04121a;}
+  .btn-primary:hover{transform:translateY(-3px); box-shadow:0 8px 20px rgba(94,234,212,0.25);}
+  .btn-outline{border:1px solid var(--border); color:var(--text);}
+  .btn-outline:hover{border-color:var(--accent); color:var(--accent);}
+  section{padding:90px 6%; max-width:1100px; margin:0 auto;}
+  h2.section-title{font-size:1.9rem; margin-bottom:40px; display:flex; align-items:center; gap:12px;}
+  h2.section-title::after{content:""; flex:1; height:1px; background:var(--border);}
+  .grid{display:grid; grid-template-columns:repeat(auto-fit,minmax(300px,1fr)); gap:24px;}
+  .card{
+    background:var(--card); border:1px solid var(--border); border-radius:14px; padding:26px;
+    transition:.25s; position:relative; overflow:hidden;
+  }
+  .card:hover{transform:translateY(-6px); border-color:var(--accent);}
+  .card h3{font-size:1.15rem; margin-bottom:10px; color:var(--accent);}
+  .card p{color:var(--muted); font-size:14.5px; margin-bottom:12px;}
+  .card ul{margin-left:18px; color:var(--muted); font-size:14px; margin-bottom:12px;}
+  .stat-row{display:flex; gap:14px; flex-wrap:wrap; margin-top:10px;}
+  .stat{background:var(--bg2); border:1px solid var(--border); border-radius:8px; padding:8px 14px; font-size:13px;}
+  .stat b{color:var(--accent2);}
+  .tags{display:flex; flex-wrap:wrap; gap:8px; margin-top:10px;}
+  .tags span{background:rgba(167,139,250,0.1); color:var(--accent2); padding:4px 10px; border-radius:6px; font-size:12px;}
+  .skills-grid{display:grid; grid-template-columns:repeat(auto-fit,minmax(220px,1fr)); gap:18px;}
+  .skill-cat h4{color:var(--accent); font-size:14px; margin-bottom:10px; text-transform:uppercase; letter-spacing:.5px;}
+  .skill-cat p{color:var(--muted); font-size:14px;}
+  .timeline{border-left:2px solid var(--border); padding-left:24px; display:flex; flex-direction:column; gap:28px;}
+  .timeline .item h4{color:var(--text); font-size:16px;}
+  .timeline .item span{color:var(--accent); font-size:13px;}
+  .timeline .item p{color:var(--muted); font-size:14px; margin-top:4px;}
+  .cert-grid{display:grid; grid-template-columns:repeat(auto-fit,minmax(280px,1fr)); gap:18px;}
+  #contact{text-align:center;}
+  .contact-links{display:flex; gap:18px; justify-content:center; flex-wrap:wrap; margin-top:20px;}
+  .contact-links a{color:var(--text); border:1px solid var(--border); padding:10px 20px; border-radius:8px; text-decoration:none; font-size:14px; transition:.2s;}
+  .contact-links a:hover{border-color:var(--accent); color:var(--accent);}
+  footer{text-align:center; padding:30px; color:var(--muted); font-size:13px; border-top:1px solid var(--border);}
+  #chat-widget{position:fixed; bottom:24px; right:24px; z-index:200;}
+  #chat-toggle{
+    width:56px; height:56px; border-radius:50%; background:linear-gradient(135deg,var(--accent),var(--accent2));
+    border:none; cursor:pointer; font-size:22px; box-shadow:0 6px 20px rgba(0,0,0,0.4);
+  }
+  #chat-box{
+    display:none; position:absolute; bottom:70px; right:0; width:300px; background:var(--card);
+    border:1px solid var(--border); border-radius:12px; padding:16px; font-size:13.5px;
+  }
+  #chat-box h4{color:var(--accent); margin-bottom:8px;}
+  #chat-box p{color:var(--muted); margin-bottom:10px;}
+  #chat-box button.q{display:block; width:100%; text-align:left; background:var(--bg2); border:1px solid var(--border); color:var(--text); padding:8px; border-radius:6px; margin-bottom:6px; cursor:pointer; font-size:12.5px;}
+  #chat-box button.q:hover{border-color:var(--accent);}
+  #chat-answer{margin-top:8px; color:var(--text); font-size:13px; min-height:20px;}
+  @media(max-width:640px){nav ul{gap:14px;} nav ul li:nth-child(n+4){display:none;}}
+  .reveal{opacity:0; transform:translateY(24px); transition:opacity .6s ease, transform .6s ease;}
+  .reveal.visible{opacity:1; transform:translateY(0);}
+  .bar-wrap{margin-bottom:14px;}
+  .bar-label{display:flex; justify-content:space-between; font-size:13px; color:var(--muted); margin-bottom:5px;}
+  .bar-track{background:var(--bg2); border:1px solid var(--border); border-radius:6px; height:8px; overflow:hidden;}
+  .bar-fill{height:100%; border-radius:6px; background:linear-gradient(90deg,var(--accent),var(--accent2)); width:0%; transition:width 1.2s ease;}
+</style>
+</head>
+<body>
+
+<nav>
+  <div class="logo">DKS</div>
+  <ul>
+    <li><a href="#about">About</a></li>
+    <li><a href="#projects">Projects</a></li>
+    <li><a href="#skills">Skills</a></li>
+    <li><a href="#education">Education</a></li>
+    <li><a href="#contact">Contact</a></li>
+  </ul>
+</nav>
+
+<header>
+  <h1>Dhananjay Kumar <span>Sharma</span></h1>
+  <p class="tag">MCA student building Deep Learning, Computer Vision & Generative AI systems — from medical imaging to LLM-powered legal document intelligence.</p>
+  <div class="badges">
+    <span>Deep Learning</span><span>Computer Vision</span><span>Generative AI</span><span>RAG</span><span>NLP</span>
+  </div>
+  <div class="cta">
+    <a class="btn btn-primary" href="#projects">View Projects</a>
+    <a class="btn btn-outline" href="mailto:dhananjayraj8210@gmail.com">Get in Touch</a>
+  </div>
+</header>
+
+<section id="about">
+  <h2 class="section-title">About</h2>
+  <p style="color:var(--muted); max-width:750px;">
+  MCA student skilled in data pre-processing and building ML-based projects with a focus on understanding systems end-to-end.
+  Hands-on experience in Deep Learning, CNNs, Generative AI, and NLP — with a modern LLM stack (LangChain, ChromaDB, RAG)
+  for context-aware, production-style applications. Strong foundation in feature engineering and scalable ML workflows.
+  </p>
+</section>
+
+<section id="projects">
+  <h2 class="section-title">Projects</h2>
+  <div class="grid">
+
+    <div class="card">
+      <h3>AI Legal Document Intelligence System</h3>
+      <p>Built for Tata Group — an end-to-end pipeline that reviews legal documents automatically: upload → OCR → clause extraction → RAG-grounded risk analysis → human approval & audit trail.</p>
+      <ul>
+        <li>Role-based auth for Compliance Officers & Senior Reviewers</li>
+        <li>OCR parsing with confidence scoring (PyPDF/Pillow)</li>
+        <li>Qdrant vector DB + local embeddings (all-MiniLM-L6-v2) for RAG retrieval</li>
+        <li>Gemini-powered clause extraction & risk flagging (HIGH/MED/LOW)</li>
+        <li>Legal Ops dashboard + full audit trail with PDF export (ReportLab)</li>
+        <li>AADHYA — a RAG-grounded conversational assistant over the document base</li>
+      </ul>
+      <div class="tags"><span>RAG</span><span>Qdrant</span><span>Gemini API</span><span>FastAPI</span><span>Next.js</span></div>
+    </div>
+
+    <div class="card">
+      <h3>Diabetic Retinopathy Classification</h3>
+      <p>Hybrid deep learning pipeline for medical image classification using transfer learning.</p>
+      <ul>
+        <li>EfficientNetB0 + SVM hybrid architecture on APTOS 2019 (Kaggle) dataset</li>
+        <li>Custom augmentation: contrast enhancement, affine transforms for class imbalance</li>
+        <li>Feature extraction from penultimate EfficientNet layer feeding an SVM classifier</li>
+      </ul>
+      <div class="stat-row"><div class="stat">F1-Score <b>84%</b></div><div class="stat">Accuracy <b>84%</b></div></div>
+      <div class="tags"><span>TensorFlow</span><span>Transfer Learning</span><span>SVM</span></div>
+    </div>
+
+    <div class="card">
+      <h3>Netflix Movies & TV Shows Clustering</h3>
+      <p>Unsupervised content segmentation across a large streaming catalog for recommendation analysis.</p>
+      <ul>
+        <li>TF-IDF + K-Means clustering over 7,700+ titles</li>
+        <li>Dimensionality reduction via Truncated SVD</li>
+        <li>EDA & feature engineering for improved content categorization</li>
+      </ul>
+      <div class="tags"><span>NLP</span><span>K-Means</span><span>GMM</span><span>Scikit-learn</span></div>
+    </div>
+
+    <div class="card">
+      <h3>Global Superstore Sales Analysis</h3>
+      <p>Exploratory data analysis on retail transaction data to uncover profitability and sales trends.</p>
+      <ul>
+        <li>Cleaned and analyzed 50,000+ retail transaction records across regions and categories</li>
+        <li>Built profitability breakdowns by region, category, and customer segment</li>
+        <li>Found loss-making sub-categories via discount vs. profit correlation analysis</li>
+        <li>Visualized sales trends, shipping delays, and top-performing markets</li>
+      </ul>
+      <div class="tags"><span>Pandas</span><span>EDA</span><span>Data Visualization</span><span>SQL</span></div>
+    </div>
+
+  </div>
+</section>
+
+<section id="skills">
+  <h2 class="section-title">Skills</h2>
+  <div class="skills-grid">
+    <div class="skill-cat"><h4>Programming</h4><p>Python, SQL</p></div>
+    <div class="skill-cat"><h4>AI / ML</h4><p>Machine Learning, Deep Learning, Computer Vision, NLP, Generative AI</p></div>
+    <div class="skill-cat"><h4>Concepts</h4><p>EDA, Data Pre-processing, Feature Engineering, Transfer Learning, Model Evaluation</p></div>
+    <div class="skill-cat"><h4>Data Analysis</h4><p>Exploratory Data Analysis, Data Cleaning, Data Visualization, Statistical Analysis, Dashboarding, SQL Querying</p></div>
+    <div class="skill-cat"><h4>Frameworks</h4><p>NumPy, Pandas, Matplotlib, Scikit-learn, TensorFlow, Keras, OpenCV, LangChain</p></div>
+    <div class="skill-cat"><h4>AI / LLM Tools</h4><p>Chroma, Vector Databases, LLMs, RAG</p></div>
+    <div class="skill-cat"><h4>Tools & Deployment</h4><p>Git, GitHub, Streamlit, REST API, MS-Excel, Jupyter, MySQL, PostgreSQL, VS Code</p></div>
+  </div>
+
+  <div style="margin-top:44px; max-width:520px;">
+    <div class="bar-wrap"><div class="bar-label"><span>Python</span><span>90%</span></div><div class="bar-track"><div class="bar-fill" data-w="90"></div></div></div>
+    <div class="bar-wrap"><div class="bar-label"><span>Data Analysis (Pandas/SQL)</span><span>85%</span></div><div class="bar-track"><div class="bar-fill" data-w="85"></div></div></div>
+    <div class="bar-wrap"><div class="bar-label"><span>Deep Learning (TensorFlow/Keras)</span><span>80%</span></div><div class="bar-track"><div class="bar-fill" data-w="80"></div></div></div>
+    <div class="bar-wrap"><div class="bar-label"><span>Generative AI / RAG</span><span>75%</span></div><div class="bar-track"><div class="bar-fill" data-w="75"></div></div></div>
+  </div>
+</section>
+
+<section id="education">
+  <h2 class="section-title">Education & Certifications</h2>
+  <div class="timeline">
+    <div class="item">
+      <span>2024 — 2026</span>
+      <h4>Master of Computer Application — Patna University</h4>
+      <p>Focus: Machine Learning, Deep Learning, Generative AI, Computer Vision. Coursework: DBMS, Theory of Computation, SQL, Data Science, Statistical Distribution.</p>
+    </div>
+    <div class="item">
+      <span>2021 — 2024</span>
+      <h4>Bachelor in Computer Application — Aryabhatta Knowledge University, Patna</h4>
+      <p>Foundation in statistical analysis, data manipulation, visualization, and programming (Python, C, C++).</p>
+    </div>
+  </div>
+  <div class="cert-grid" style="margin-top:36px;">
+    <div class="card"><h3 style="font-size:1rem;">Professional Fellowship in Data Science & Agentic AI</h3><p>IIT Patna</p></div>
+    <div class="card"><h3 style="font-size:1rem;">Applied Professional Certification in Data Science & AI</h3><p>AlmaBetter</p></div>
+  </div>
+</section>
+
+<section id="contact">
+  <h2 class="section-title" style="justify-content:center;">Let's Connect</h2>
+  <p style="color:var(--muted);">Open to opportunities in ML, Computer Vision, and Generative AI.</p>
+  <div class="contact-links">
+    <a href="mailto:dhananjayraj8210@gmail.com">✉ Email</a>
+    <a href="tel:+917366825701">📞 +91-7366825701</a>
+    <a href="https://linkedin.com/in/dhananjaykrsharma" target="_blank">LinkedIn</a>
+    <a href="https://github.com/JaySharma424" target="_blank">GitHub</a>
+  </div>
+</section>
+
+<footer>© 2026 Dhananjay Kumar Sharma — Built with HTML, CSS & a bit of curiosity.</footer>
+
+<div id="chat-widget">
+  <button id="chat-toggle" onclick="document.getElementById('chat-box').style.display = document.getElementById('chat-box').style.display==='block'?'none':'block'">💬</button>
+  <div id="chat-box">
+    <h4>Quick Ask</h4>
+    <p>Ask about my work:</p>
+    <button class="q" onclick="ans(0)">What's your best project?</button>
+    <button class="q" onclick="ans(1)">What ML frameworks do you use?</button>
+    <button class="q" onclick="ans(2)">How can I contact you?</button>
+    <div id="chat-answer"></div>
+  </div>
+</div>
+<script>
+const answers=[
+"The Tata Group AI Legal Document Intelligence System — a full RAG-based pipeline combining OCR, clause extraction, risk flagging and an audit trail.",
+"TensorFlow, Keras, Scikit-learn, OpenCV, and LangChain for LLM/RAG work.",
+"Reach out via email at dhananjayraj8210@gmail.com or connect on LinkedIn/GitHub above."
+];
+function ans(i){document.getElementById('chat-answer').innerText=answers[i];}
+
+// scroll reveal
+document.querySelectorAll('section').forEach(s=>s.classList.add('reveal'));
+const io=new IntersectionObserver(entries=>{
+  entries.forEach(e=>{
+    if(e.isIntersecting){
+      e.target.classList.add('visible');
+      if(e.target.id==='skills'){
+        document.querySelectorAll('.bar-fill').forEach(b=>b.style.width=b.dataset.w+'%');
+      }
+    }
+  });
+},{threshold:0.15});
+document.querySelectorAll('.reveal').forEach(s=>io.observe(s));
+</script>
+
+</body>
+</html>
