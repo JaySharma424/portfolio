@@ -234,9 +234,96 @@
   #ai-input:focus{outline:none; border-color:var(--indigo);}
   #ai-send{background:var(--indigo); border:none; color:#0a0a0d; font-weight:600; font-size:12.5px; padding:0 16px; border-radius:8px; cursor:pointer;}
   #ai-send:disabled{opacity:.5; cursor:default;}
+
+  /* ---------- SPIDER INTRO ---------- */
+  #spider-intro{position:fixed; inset:0; z-index:9999; background:var(--bg); display:flex; align-items:flex-start; justify-content:center; overflow:hidden; transition:opacity .6s ease, visibility .6s ease;}
+  #spider-intro.hide{opacity:0; visibility:hidden; pointer-events:none;}
+  #web-canvas{position:absolute; inset:0; width:100%; height:100%;}
+  #thread{position:absolute; top:0; left:50%; width:2px; background:linear-gradient(180deg, rgba(230,230,235,0.9), rgba(230,230,235,0.5)); transform-origin:top center; height:0;}
+  #spider-rig{position:absolute; top:0; left:50%; transform:translateX(-50%); display:flex; flex-direction:column; align-items:center;}
+  #spider{width:54px; height:54px; position:relative; animation:sway 2.6s ease-in-out infinite; transform-origin:top center;}
+  @keyframes sway{0%,100%{transform:rotate(-7deg);} 50%{transform:rotate(7deg);}}
+  #spider svg{width:100%; height:100%; display:block;}
+  .intro-caption{position:absolute; bottom:64px; left:0; right:0; text-align:center; font-family:var(--mono); font-size:12px; letter-spacing:.1em; text-transform:uppercase; color:var(--muted-2); opacity:0; animation:fadein .6s ease forwards; animation-delay:1.4s;}
+  @keyframes fadein{to{opacity:1;}}
+  .skip-intro{position:absolute; top:24px; right:24px; font-family:var(--mono); font-size:11px; color:var(--muted-2); border:1px solid var(--border-soft); padding:8px 14px; border-radius:20px; background:transparent; cursor:pointer; z-index:10; transition:.15s; opacity:0; animation:fadein .6s ease forwards; animation-delay:.8s;}
+  .skip-intro:hover{color:var(--text); border-color:var(--indigo);}
+  body.intro-active{overflow:hidden; height:100vh;}
+
+  /* ---------- PLAYGROUND SECTION ---------- */
+  .pg-tabs{display:flex; gap:8px; flex-wrap:wrap; margin:44px 0 32px;}
+  .pg-tab{font-family:var(--mono); font-size:12.5px; color:var(--muted); background:var(--panel); border:1px solid var(--border); padding:9px 16px; border-radius:8px; cursor:pointer; transition:.15s;}
+  .pg-tab:hover{border-color:var(--indigo); color:var(--text);}
+  .pg-tab.active{background:var(--indigo); color:#0a0a0d; border-color:var(--indigo); font-weight:600;}
+  .pg-panel{display:none;}
+  .pg-panel.active{display:block;}
+  .pg-card{border:1px solid var(--border); border-radius:14px; background:var(--panel); padding:28px; }
+  .pg-card h4{font-size:15px; font-weight:600; margin-bottom:6px;}
+  .pg-card .pg-desc{color:var(--muted); font-size:13.5px; margin-bottom:22px; max-width:60ch;}
+
+  /* Vector DB demo */
+  .vec-input-row{display:flex; gap:10px; flex-wrap:wrap; margin-bottom:22px;}
+  .vec-input-row input{flex:1; min-width:220px; background:var(--bg); border:1px solid var(--border); color:var(--text); padding:11px 14px; border-radius:8px; font-size:13.5px; font-family:var(--sans);}
+  .vec-input-row input:focus{outline:none; border-color:var(--indigo);}
+  .vec-input-row button{background:var(--indigo); border:none; color:#0a0a0d; font-weight:600; font-size:13px; padding:0 20px; border-radius:8px; cursor:pointer;}
+  .vec-space{position:relative; height:280px; border:1px solid var(--border-soft); border-radius:10px; background:radial-gradient(circle at 50% 50%, rgba(124,140,255,0.05), transparent 70%); overflow:hidden;}
+  .vec-dot{position:absolute; width:10px; height:10px; border-radius:50%; background:var(--muted-2); transform:translate(-50%,-50%); transition:all .5s cubic-bezier(.2,.8,.2,1); cursor:default;}
+  .vec-dot.match{background:var(--green); box-shadow:0 0 12px rgba(110,231,183,0.6);}
+  .vec-dot .vd-label{position:absolute; top:14px; left:50%; transform:translateX(-50%); font-family:var(--mono); font-size:10px; color:var(--muted); white-space:nowrap; opacity:0; transition:opacity .2s;}
+  .vec-dot:hover .vd-label{opacity:1;}
+  .vec-query-dot{position:absolute; width:14px; height:14px; border-radius:50%; background:var(--indigo); transform:translate(-50%,-50%); box-shadow:0 0 16px rgba(124,140,255,0.7); transition:all .5s cubic-bezier(.2,.8,.2,1); z-index:5;}
+  .vec-results{margin-top:18px; display:flex; flex-direction:column; gap:8px;}
+  .vec-result-row{display:flex; justify-content:space-between; align-items:center; padding:10px 14px; background:var(--bg); border:1px solid var(--border-soft); border-radius:8px; font-size:13px;}
+  .vec-result-row .vr-score{font-family:var(--mono); color:var(--green); font-size:12px;}
+
+  /* LangGraph demo */
+  .lg-canvas{position:relative; min-height:260px; padding:20px 0;}
+  .lg-node{position:absolute; background:var(--bg); border:1px solid var(--border); border-radius:9px; padding:10px 16px; font-size:12.5px; font-family:var(--mono); text-align:center; transition:.3s; white-space:nowrap;}
+  .lg-node.active{border-color:var(--indigo); color:var(--indigo); box-shadow:0 0 18px rgba(124,140,255,0.35); background:var(--indigo-soft);}
+  .lg-node.done{border-color:var(--green); color:var(--green);}
+  .lg-edge{position:absolute; height:2px; background:var(--border); transform-origin:left center; transition:.3s;}
+  .lg-edge.active{background:var(--indigo); box-shadow:0 0 8px rgba(124,140,255,0.6);}
+  .lg-controls{display:flex; gap:10px; margin-top:24px; flex-wrap:wrap; align-items:center;}
+  .lg-controls button{background:var(--indigo); border:none; color:#0a0a0d; font-weight:600; font-size:13px; padding:10px 20px; border-radius:8px; cursor:pointer;}
+  .lg-controls button:disabled{opacity:.5; cursor:default;}
+  .lg-status{font-family:var(--mono); font-size:12px; color:var(--muted);}
+
+  /* RAG flow demo */
+  .rag-flow{display:flex; align-items:center; gap:0; flex-wrap:wrap; justify-content:center; margin-bottom:8px;}
+  .rag-step{border:1px solid var(--border); border-radius:10px; padding:16px 18px; text-align:center; min-width:120px; background:var(--bg); transition:.4s;}
+  .rag-step.lit{border-color:var(--indigo); box-shadow:0 0 18px rgba(124,140,255,0.3); background:var(--indigo-soft);}
+  .rag-step .ri{font-size:20px; margin-bottom:6px;}
+  .rag-step .rt{font-family:var(--mono); font-size:11.5px; color:var(--text);}
+  .rag-arrow{color:var(--muted-2); font-size:18px; padding:0 10px;}
+  @media(max-width:700px){.rag-arrow{transform:rotate(90deg);}}
 </style>
 </head>
-<body>
+<body class="intro-active">
+
+<div id="spider-intro">
+  <button class="skip-intro" id="skip-intro-btn">Skip ↓</button>
+  <canvas id="web-canvas"></canvas>
+  <div id="thread"></div>
+  <div id="spider-rig">
+    <div id="spider">
+      <svg viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
+        <ellipse cx="50" cy="62" rx="20" ry="24" fill="#141418" stroke="#7c8cff" stroke-width="2"/>
+        <circle cx="50" cy="34" r="13" fill="#141418" stroke="#7c8cff" stroke-width="2"/>
+        <circle cx="45" cy="31" r="2.4" fill="#a5b0ff"/>
+        <circle cx="55" cy="31" r="2.4" fill="#a5b0ff"/>
+        <g stroke="#7c8cff" stroke-width="2" fill="none" stroke-linecap="round">
+          <path d="M34 55 C20 50, 10 45, 4 34"/>
+          <path d="M34 62 C18 62, 8 60, 2 56"/>
+          <path d="M34 70 C20 76, 10 82, 4 90"/>
+          <path d="M66 55 C80 50, 90 45, 96 34"/>
+          <path d="M66 62 C82 62, 92 60, 98 56"/>
+          <path d="M66 70 C80 76, 90 82, 96 90"/>
+        </g>
+      </svg>
+    </div>
+  </div>
+  <div class="intro-caption">spinning up the portfolio…</div>
+</div>
 
 <nav id="navbar">
   <div class="wrap row">
@@ -247,6 +334,7 @@
       <li><a href="#projects">Projects</a></li>
       <li><a href="#skills">Skills</a></li>
       <li><a href="#dsa">DSA</a></li>
+      <li><a href="#playground">Playground</a></li>
       <li><a href="#contact" class="always-show">Contact</a></li>
       <li class="always-show"><a class="nav-cta" href="Dhananjay_Kumar_Sharma_Resume.pdf" target="_blank" rel="noopener">Résumé ↓</a></li>
     </ul>
@@ -494,6 +582,66 @@
   </div>
 </section>
 
+<section id="playground" class="reveal">
+  <div class="wrap">
+    <div class="s-eyebrow">06 / Try it yourself</div>
+    <h2 class="s-title" style="max-width:16ch;">GenAI concepts, <em>made tangible.</em></h2>
+    <p class="s-sub">Small live demos of the ideas behind my projects — vector search, agent graphs, and the RAG loop.</p>
+
+    <div class="pg-tabs">
+      <button class="pg-tab active" data-panel="pg-vector">Vector DB search</button>
+      <button class="pg-tab" data-panel="pg-langgraph">LangGraph agent</button>
+      <button class="pg-tab" data-panel="pg-rag">RAG pipeline</button>
+    </div>
+
+    <div class="pg-panel active" id="pg-vector">
+      <div class="pg-card">
+        <h4>Semantic nearest-neighbor search</h4>
+        <p class="pg-desc">Type a query below — it gets "embedded" into the 2D space and matched against a handful of stored document vectors by cosine similarity. This is the retrieval step behind Job Dekho's semantic search and the Tata Group clause retriever.</p>
+        <div class="vec-input-row">
+          <input id="vec-input" type="text" placeholder="e.g. contract risk clause, resume skills match…" autocomplete="off">
+          <button id="vec-search-btn">Embed &amp; search</button>
+        </div>
+        <div class="vec-space" id="vec-space"></div>
+        <div class="vec-results" id="vec-results"></div>
+      </div>
+    </div>
+
+    <div class="pg-panel" id="pg-langgraph">
+      <div class="pg-card">
+        <h4>Agent graph execution</h4>
+        <p class="pg-desc">A simplified version of the 10-stage LangGraph pipeline from the Tata Group legal-document system. Step through it to see how state moves node to node, with conditional review routing.</p>
+        <div class="lg-canvas" id="lg-canvas"></div>
+        <div class="lg-controls">
+          <button id="lg-step-btn">▶ Step</button>
+          <button id="lg-reset-btn">↺ Reset</button>
+          <span class="lg-status" id="lg-status">Ready — click Step to begin</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="pg-panel" id="pg-rag">
+      <div class="pg-card">
+        <h4>Retrieval-augmented generation loop</h4>
+        <p class="pg-desc">The four-stage loop every RAG system runs — query, retrieve, augment, generate — evaluated in production with RAGAS metrics like the ones used on the Tata Group platform.</p>
+        <div class="rag-flow" id="rag-flow">
+          <div class="rag-step" data-i="0"><div class="ri">❓</div><div class="rt">Query</div></div>
+          <div class="rag-arrow">→</div>
+          <div class="rag-step" data-i="1"><div class="ri">🔎</div><div class="rt">Retrieve</div></div>
+          <div class="rag-arrow">→</div>
+          <div class="rag-step" data-i="2"><div class="ri">🧩</div><div class="rt">Augment</div></div>
+          <div class="rag-arrow">→</div>
+          <div class="rag-step" data-i="3"><div class="ri">✨</div><div class="rt">Generate</div></div>
+        </div>
+        <div class="lg-controls">
+          <button id="rag-play-btn">▶ Run loop</button>
+          <span class="lg-status" id="rag-status">Ready — click Run to animate</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
 <section id="certifications" class="reveal">
   <div class="wrap">
     <div class="s-eyebrow">06 / Credentials</div>
@@ -688,6 +836,364 @@ toggle.addEventListener('click', ()=>{
   panel.classList.toggle('open');
   if(panel.classList.contains('open')) input.focus();
 });
+
+// ================= SPIDER INTRO =================
+(function(){
+  const introEl = document.getElementById('spider-intro');
+  const thread = document.getElementById('thread');
+  const rig = document.getElementById('spider-rig');
+  const canvas = document.getElementById('web-canvas');
+  const ctx = canvas.getContext('2d');
+  const skipBtn = document.getElementById('skip-intro-btn');
+  let webStrands = [];
+  let dpr = window.devicePixelRatio || 1;
+
+  function resizeCanvas(){
+    canvas.width = window.innerWidth * dpr;
+    canvas.height = window.innerHeight * dpr;
+    canvas.style.width = window.innerWidth+'px';
+    canvas.style.height = window.innerHeight+'px';
+    ctx.setTransform(dpr,0,0,dpr,0,0);
+  }
+  resizeCanvas();
+  window.addEventListener('resize', resizeCanvas);
+
+  const cx = window.innerWidth/2;
+  const dropY = Math.min(280, window.innerHeight*0.32);
+
+  // build a radial web centered at drop point, drawn progressively
+  function buildWeb(){
+    const rings = 4;
+    const spokes = 8;
+    const maxR = 210;
+    const lines = [];
+    // spokes
+    for(let s=0; s<spokes; s++){
+      const ang = (s/spokes)*Math.PI*2;
+      lines.push({type:'spoke', ang, len: maxR});
+    }
+    // rings (polygon rings connecting spokes)
+    for(let r=1;r<=rings;r++){
+      const rad = (r/rings)*maxR;
+      const pts = [];
+      for(let s=0;s<spokes;s++){
+        const ang = (s/spokes)*Math.PI*2;
+        pts.push({x: cx + Math.cos(ang)*rad, y: dropY + Math.sin(ang)*rad});
+      }
+      lines.push({type:'ring', pts});
+    }
+    return lines;
+  }
+  webStrands = buildWeb();
+
+  let webProgress = 0; // 0 -> 1
+  function drawWeb(progress){
+    ctx.clearRect(0,0,window.innerWidth, window.innerHeight);
+    ctx.strokeStyle = 'rgba(124,140,255,0.35)';
+    ctx.lineWidth = 1;
+    const spokeCount = 8;
+    const totalItems = webStrands.length;
+    const visibleCount = Math.floor(progress * totalItems);
+    for(let i=0;i<visibleCount;i++){
+      const item = webStrands[i];
+      ctx.beginPath();
+      if(item.type==='spoke'){
+        ctx.moveTo(cx, dropY);
+        ctx.lineTo(cx + Math.cos(item.ang)*item.len, dropY + Math.sin(item.ang)*item.len);
+      } else {
+        item.pts.forEach((p,idx)=>{
+          if(idx===0) ctx.moveTo(p.x,p.y); else ctx.lineTo(p.x,p.y);
+        });
+        ctx.closePath();
+      }
+      ctx.stroke();
+    }
+  }
+
+  let dropped = false;
+  let start = null;
+  const dropDuration = 900; // ms for the drop
+  const webDuration = 1300; // ms for web to spin after drop
+
+  function animateDrop(ts){
+    if(!start) start = ts;
+    const elapsed = ts - start;
+    const p = Math.min(1, elapsed/dropDuration);
+    const eased = p<1 ? (1 - Math.pow(1-p,3)) : 1;
+    const y = eased * dropY;
+    thread.style.height = y+'px';
+    rig.style.top = y+'px';
+    if(p<1){
+      requestAnimationFrame(animateDrop);
+    } else {
+      dropped = true;
+      webStart = null;
+      requestAnimationFrame(animateWebSpin);
+    }
+  }
+  let webStart = null;
+  function animateWebSpin(ts){
+    if(!webStart) webStart = ts;
+    const elapsed = ts - webStart;
+    const p = Math.min(1, elapsed/webDuration);
+    drawWeb(p);
+    if(p<1){
+      requestAnimationFrame(animateWebSpin);
+    } else {
+      setTimeout(finishIntro, 500);
+    }
+  }
+
+  function finishIntro(){
+    introEl.classList.add('hide');
+    document.body.classList.remove('intro-active');
+    setTimeout(()=>{ introEl.style.display='none'; }, 650);
+  }
+
+  skipBtn.addEventListener('click', finishIntro);
+
+  // safety fallback: never trap user more than 6s
+  setTimeout(()=>{ if(!introEl.classList.contains('hide')) finishIntro(); }, 6000);
+
+  window.addEventListener('load', ()=>{
+    requestAnimationFrame(animateDrop);
+  });
+  // in case load already fired
+  if(document.readyState==='complete'){
+    requestAnimationFrame(animateDrop);
+  }
+})();
+
+// ================= PLAYGROUND: TAB SWITCHING =================
+(function(){
+  const tabs = document.querySelectorAll('.pg-tab');
+  const panels = document.querySelectorAll('.pg-panel');
+  tabs.forEach(tab=>{
+    tab.addEventListener('click', ()=>{
+      tabs.forEach(t=>t.classList.remove('active'));
+      panels.forEach(p=>p.classList.remove('active'));
+      tab.classList.add('active');
+      document.getElementById(tab.dataset.panel).classList.add('active');
+    });
+  });
+})();
+
+// ================= PLAYGROUND: VECTOR DB DEMO =================
+(function(){
+  const space = document.getElementById('vec-space');
+  const resultsEl = document.getElementById('vec-results');
+  const input = document.getElementById('vec-input');
+  const btn = document.getElementById('vec-search-btn');
+  if(!space) return;
+
+  const docs = [
+    {label:'Legal clause: liability cap', keywords:['risk','liability','legal','clause','contract','compliance'], x:0.72, y:0.30},
+    {label:'Resume: Python + ML skills', keywords:['resume','skills','python','ml','match','job'], x:0.25, y:0.62},
+    {label:'Job posting: GenAI engineer', keywords:['job','genai','engineer','posting','role'], x:0.30, y:0.25},
+    {label:'Retinal image scan record', keywords:['medical','image','retina','diagnosis','health'], x:0.80, y:0.75},
+    {label:'RAGAS eval report', keywords:['evaluation','rag','ragas','metrics','relevancy'], x:0.55, y:0.55},
+    {label:'Audit log entry', keywords:['audit','log','review','governance','postgres'], x:0.68, y:0.68},
+  ];
+
+  function renderDots(activeIdxs, queryPos){
+    space.innerHTML = '';
+    const w = space.clientWidth, h = space.clientHeight;
+    docs.forEach((d,i)=>{
+      const dot = document.createElement('div');
+      dot.className = 'vec-dot' + (activeIdxs.includes(i) ? ' match' : '');
+      dot.style.left = (d.x*w)+'px';
+      dot.style.top = (d.y*h)+'px';
+      const lbl = document.createElement('div');
+      lbl.className='vd-label';
+      lbl.textContent = d.label;
+      dot.appendChild(lbl);
+      space.appendChild(dot);
+    });
+    if(queryPos){
+      const q = document.createElement('div');
+      q.className = 'vec-query-dot';
+      q.style.left = (queryPos.x*w)+'px';
+      q.style.top = (queryPos.y*h)+'px';
+      space.appendChild(q);
+    }
+  }
+  renderDots([]);
+
+  function runSearch(){
+    const q = (input.value||'').toLowerCase().trim();
+    if(!q){ input.focus(); return; }
+    const scored = docs.map((d,i)=>{
+      let score = 0;
+      d.keywords.forEach(k=>{ if(q.includes(k) || k.includes(q)) score += 1; });
+      // small baseline randomness to feel alive, seeded by string length
+      score += (q.length % 3) * 0.05;
+      return {i, d, score};
+    }).sort((a,b)=>b.score-a.score);
+
+    const top = scored.filter(s=>s.score>0).slice(0,3);
+    const chosen = top.length ? top : scored.slice(0,2);
+
+    // fake query embedding position = average of top matches, jittered
+    let qx=0.5, qy=0.5;
+    if(chosen.length){
+      qx = chosen.reduce((s,c)=>s+c.d.x,0)/chosen.length + (Math.random()-0.5)*0.06;
+      qy = chosen.reduce((s,c)=>s+c.d.y,0)/chosen.length + (Math.random()-0.5)*0.06;
+    }
+    renderDots(chosen.map(c=>c.i), {x:qx,y:qy});
+
+    resultsEl.innerHTML='';
+    chosen.forEach(c=>{
+      const row = document.createElement('div');
+      row.className='vec-result-row';
+      const simPct = Math.min(99, 62 + c.score*11 + Math.random()*6).toFixed(1);
+      row.innerHTML = `<span>${c.d.label}</span><span class="vr-score">${simPct}% match</span>`;
+      resultsEl.appendChild(row);
+    });
+    if(!chosen.length){
+      resultsEl.innerHTML = '<div class="vec-result-row"><span>No close vectors — try a different query</span></div>';
+    }
+  }
+  btn.addEventListener('click', runSearch);
+  input.addEventListener('keydown', e=>{ if(e.key==='Enter') runSearch(); });
+})();
+
+// ================= PLAYGROUND: LANGGRAPH DEMO =================
+(function(){
+  const canvas = document.getElementById('lg-canvas');
+  if(!canvas) return;
+  const stepBtn = document.getElementById('lg-step-btn');
+  const resetBtn = document.getElementById('lg-reset-btn');
+  const statusEl = document.getElementById('lg-status');
+
+  const nodes = [
+    {id:'upload', label:'Upload', x:2, y:30},
+    {id:'ocr', label:'OCR', x:16, y:10},
+    {id:'clause', label:'Clause Extract', x:34, y:30},
+    {id:'retrieve', label:'RAG Retrieve', x:52, y:10},
+    {id:'reason', label:'Legal Reasoning', x:70, y:30},
+    {id:'risk', label:'Risk Flag', x:52, y:52},
+    {id:'review', label:'Human Review', x:70, y:52},
+    {id:'audit', label:'Audit Log', x:88, y:30},
+  ];
+  const edges = [
+    ['upload','ocr'],['ocr','clause'],['clause','retrieve'],['retrieve','reason'],
+    ['reason','risk'],['risk','review'],['review','audit'],['reason','audit']
+  ];
+
+  function renderGraph(){
+    canvas.innerHTML='';
+    const w = canvas.clientWidth || 900;
+    const h = 260;
+    const nodeEls = {};
+    nodes.forEach(n=>{
+      const el = document.createElement('div');
+      el.className='lg-node';
+      el.id = 'lgn-'+n.id;
+      el.textContent = n.label;
+      el.style.left = (n.x/100*w)+'px';
+      el.style.top = (n.y/100*h)+'px';
+      canvas.appendChild(el);
+      nodeEls[n.id]=el;
+    });
+    // draw edges after nodes are placed so we can read offsets
+    requestAnimationFrame(()=>{
+      edges.forEach(([a,b])=>{
+        const na = nodeEls[a], nb = nodeEls[b];
+        const ax = na.offsetLeft + na.offsetWidth/2, ay = na.offsetTop + na.offsetHeight/2;
+        const bx = nb.offsetLeft + nb.offsetWidth/2, by = nb.offsetTop + nb.offsetHeight/2;
+        const dx = bx-ax, dy = by-ay;
+        const len = Math.sqrt(dx*dx+dy*dy);
+        const ang = Math.atan2(dy,dx)*180/Math.PI;
+        const edgeEl = document.createElement('div');
+        edgeEl.className='lg-edge';
+        edgeEl.id = 'lge-'+a+'-'+b;
+        edgeEl.style.left = ax+'px';
+        edgeEl.style.top = ay+'px';
+        edgeEl.style.width = len+'px';
+        edgeEl.style.transform = `rotate(${ang}deg)`;
+        canvas.insertBefore(edgeEl, canvas.firstChild);
+      });
+    });
+    canvas.style.minHeight = h+'px';
+    canvas.style.position='relative';
+  }
+  renderGraph();
+  window.addEventListener('resize', renderGraph);
+
+  let step = -1;
+  const order = nodes.map(n=>n.id);
+
+  function updateStep(){
+    order.forEach((id,i)=>{
+      const el = document.getElementById('lgn-'+id);
+      if(!el) return;
+      el.classList.remove('active','done');
+      if(i<step) el.classList.add('done');
+      if(i===step) el.classList.add('active');
+    });
+    edges.forEach(([a,b])=>{
+      const el = document.getElementById('lge-'+a+'-'+b);
+      if(!el) return;
+      const ai = order.indexOf(a);
+      el.classList.toggle('active', ai <= step && ai>=0 && ai<step);
+    });
+    if(step<0){
+      statusEl.textContent = 'Ready — click Step to begin';
+    } else if(step>=order.length-1){
+      statusEl.textContent = 'Pipeline complete — audit log written ✓';
+    } else {
+      statusEl.textContent = `Running: ${nodes[step].label}…`;
+    }
+    stepBtn.disabled = step>=order.length-1;
+  }
+  stepBtn.addEventListener('click', ()=>{
+    step = Math.min(order.length-1, step+1);
+    updateStep();
+  });
+  resetBtn.addEventListener('click', ()=>{
+    step=-1;
+    updateStep();
+  });
+  updateStep();
+})();
+
+// ================= PLAYGROUND: RAG LOOP DEMO =================
+(function(){
+  const playBtn = document.getElementById('rag-play-btn');
+  const statusEl = document.getElementById('rag-status');
+  if(!playBtn) return;
+  const steps = document.querySelectorAll('#rag-flow .rag-step');
+  let running = false;
+
+  function litLabel(i){
+    return ['Parsing the query…','Retrieving nearest documents…','Augmenting the prompt with context…','Generating the grounded answer…'][i];
+  }
+
+  playBtn.addEventListener('click', ()=>{
+    if(running) return;
+    running = true;
+    playBtn.disabled = true;
+    steps.forEach(s=>s.classList.remove('lit'));
+    let i=0;
+    function tick(){
+      steps.forEach(s=>s.classList.remove('lit'));
+      steps[i].classList.add('lit');
+      statusEl.textContent = litLabel(i);
+      i++;
+      if(i<steps.length){
+        setTimeout(tick, 850);
+      } else {
+        setTimeout(()=>{
+          steps.forEach(s=>s.classList.remove('lit'));
+          statusEl.textContent = 'Loop complete — response returned ✓';
+          playBtn.disabled = false;
+          running = false;
+        }, 850);
+      }
+    }
+    tick();
+  });
+})();
 </script>
 
 </body>
